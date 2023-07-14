@@ -8,8 +8,6 @@ import {
     Switch
 } from "./styled"
 
-import { useParams } from "react-router-dom";
-
 import { DashboardIcon } from "../../images/menuLeft/Dashboard";
 import { FinanceIcon } from "../../images/menuLeft/Finance";
 import { SettingsIcon } from "../../images/menuLeft/Settings";
@@ -18,9 +16,6 @@ import { ExitIcon } from "../../images/menuLeft/Exit";
 import Moon from '../../images/menuLeft/Moon.svg';
 
 export const MenuLeft = () => {
-
-    let { params } = useParams();
-    console.log(params, 'aaaa')
 
     return(
         <Background>

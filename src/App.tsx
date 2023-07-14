@@ -4,21 +4,22 @@ import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 
 import {
-  createBrowserRouter,
-  RouterProvider,
+  useParams
 } from "react-router-dom";
 import { MenuLeft } from './components/menuLeft';
 import { Header } from './components/header';
-import { Dashboard } from './pages/Dashboard';
-
-const router = createBrowserRouter([
-  {
-    path: "/dashboard",
-    element: <Dashboard/>,
-  },
-]);
+import { Dashboard } from './pages/Dashboard/Dashboard';
 
 function App() {
+  
+  const {page} = useParams();
+
+  const Page = () => {
+    switch(page){
+      case 'dashboard': return <Dashboard/>
+    }
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <div className='divAppGrid'>
@@ -27,7 +28,7 @@ function App() {
         <Header title='Teste'/>
 
         <React.Fragment>
-          <RouterProvider router={router}/>  
+          {Page()}
         </React.Fragment>
       </div>
     </ThemeProvider>

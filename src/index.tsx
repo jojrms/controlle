@@ -6,13 +6,25 @@ import reportWebVitals from './reportWebVitals';
 import './global.css';
 import './fonts/fonts.css';
 
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+const router = createBrowserRouter([
+  {
+    path: "/:page",
+    element: <App/>,
+  },
+]);
+
 root.render(
   <React.StrictMode>
-    <App/>
+    <RouterProvider router={router}/> 
   </React.StrictMode>
 );
 
