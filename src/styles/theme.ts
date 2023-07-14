@@ -17,6 +17,7 @@ export default {
         backgroundGeneral: '#F3F4F9',
         cards: '#FFFFFF',
         backgroundIcons: '#23272E',
+        optionHover: '#e0e1e8',
     },
     border: {
         borderColor: '#E1E4EB',

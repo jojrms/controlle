@@ -35,7 +35,12 @@ export const Option = styled.li<OptionProps>`
     align-items: center;
     gap: 15px;
     padding: 18px 20px;
-    border-radius: ${props => props.theme.border.menuBorderRadius}
+    border-radius: ${props => props.theme.border.menuBorderRadius};
+    transition: all 0.3s;
+
+    &:hover{
+        background-color: ${props => props.theme.backgroundColor.optionHover};
+    }
 `
 
 export const BottomOptions = styled.div`
