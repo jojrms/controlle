@@ -1,7 +1,16 @@
-import { Background } from "./styled"
+import { 
+    Background,
+    Title 
+} from "./styled"
 
-export const Header = () => {
+type HeaderProps = {
+    title: string;
+}
+
+export const Header = ({title} : HeaderProps) => {
     return(
-        <Background></Background>
+        <Background>
+            <Title>{title}</Title>
+        </Background>
     )
 }

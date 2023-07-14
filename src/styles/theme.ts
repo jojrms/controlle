@@ -1,4 +1,9 @@
 export default {
+    fontSize: {
+        sz: "14px",
+        normal: "18px",
+        lg: "25px",
+    },
     fontColor: {
         menuLeft: {
             inactiveOption: '#949494',

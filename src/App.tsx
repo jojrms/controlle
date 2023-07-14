@@ -23,7 +23,7 @@ function App() {
       <div className='divAppGrid'>
         
         <MenuLeft/>
-        <Header/>
+        <Header title='Teste'/>
 
         <React.Fragment>
           <RouterProvider router={router}/>  
