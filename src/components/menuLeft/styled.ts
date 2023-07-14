@@ -41,6 +41,7 @@ export const Option = styled.li<OptionProps>`
     padding: 18px 20px;
     border-radius: ${props => props.theme.border.menuBorderRadius};
     transition: all 0.3s;
+    font-family: Gilroy-Medium;
 
     &:hover{
         background-color: ${({selected}) => selected ? props => props.theme.backgroundColor.backgroundIcons : props => props.theme.backgroundColor.optionHover};
@@ -62,6 +63,7 @@ export const ThemeButton = styled.span`
     background-color: ${props => props.theme.border.borderColor};
     border-radius: ${props => props.theme.border.menuBorderRadius};
     cursor: pointer;
+    font-family: Gilroy-Medium;
 `
 export const Switch = styled.span<ThemeButtonProps>`
     width: 50px;
