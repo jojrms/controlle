@@ -9,6 +9,7 @@ import {
 import { MenuLeft } from './components/menuLeft';
 import { Header } from './components/header';
 import { Dashboard } from './pages/Dashboard/Dashboard';
+import { Finance } from './pages/Finance/Finance';
 
 function App() {
   
@@ -16,7 +17,8 @@ function App() {
 
   const Page = () => {
     switch(page){
-      case 'dashboard': return <Dashboard/>
+      case 'dashboard': return <Dashboard/>;
+      case 'finance': return <Finance/>;
     }
   }
 
