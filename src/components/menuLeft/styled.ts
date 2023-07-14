@@ -6,6 +6,10 @@ type OptionProps = {
     selected: boolean;
 }
 
+type ThemeButtonProps = {
+    darkMode: boolean;
+}
+
 export const Background = styled.aside`
     background-color: ${props => props.theme.backgroundColor.menuLeft};
     grid-area: menu;
@@ -39,7 +43,7 @@ export const Option = styled.li<OptionProps>`
     transition: all 0.3s;
 
     &:hover{
-        background-color: ${props => props.theme.backgroundColor.optionHover};
+        background-color: ${({selected}) => selected ? props => props.theme.backgroundColor.backgroundIcons : props => props.theme.backgroundColor.optionHover};
     }
 `
 
@@ -48,4 +52,31 @@ export const BottomOptions = styled.div`
     height: 100%;
     border-top: 2px solid transparent;
     border-color: ${props => props.theme.border.borderColor};
+`
+export const ThemeButton = styled.span`
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: min-content auto min-content;
+    align-items: center;
+    gap: 10px;
+    background-color: ${props => props.theme.border.borderColor};
+    border-radius: ${props => props.theme.border.menuBorderRadius};
+    cursor: pointer;
+`
+export const Switch = styled.span<ThemeButtonProps>`
+    width: 50px;
+    height: 20px;
+    display: grid;
+    border-radius: 50px;
+    background-color: #C3C6CE;
+    padding: 3px;
+
+    #check{
+        width: 50%;
+        height: 100%;
+        border-radius: 50px;
+        background-color: white;
+        transition: all .3s;
+        margin-left: ${({darkMode}) => darkMode ? '50%' : '0%'};
+    }
 `
