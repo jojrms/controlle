@@ -20,12 +20,20 @@ function App() {
     }
   }
 
+  const titleFunction = () => {
+    switch (page) {
+        case 'dashboard' : return "Dashboard";
+        case 'finance' : return "Financeiro";
+        case 'settings' : return "Configurações";
+    }
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <div className='divAppGrid'>
         
         <MenuLeft/>
-        <Header title='Teste'/>
+        <Header title={titleFunction()}/>
 
         <React.Fragment>
           {Page()}

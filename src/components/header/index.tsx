@@ -1,13 +1,14 @@
 import { 
     Background,
     Title 
-} from "./styled"
+} from "./styled";
 
 type HeaderProps = {
-    title: string;
+    title: string | undefined;
 }
 
 export const Header = ({title} : HeaderProps) => {
+
     return(
         <Background>
             <Title>{title}</Title>
