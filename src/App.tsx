@@ -9,11 +9,12 @@ import {
 } from "react-router-dom";
 import { MenuLeft } from './components/menuLeft';
 import { Header } from './components/header';
+import { Dashboard } from './pages/Dashboard';
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <div style={{gridArea: "content"}}></div>,
+    path: "/dashboard",
+    element: <Dashboard/>,
   },
 ]);
 

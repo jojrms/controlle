@@ -7,7 +7,7 @@ type OptionProps = {
 }
 
 type ThemeButtonProps = {
-    darkMode: boolean;
+    darkmode: boolean;
 }
 
 export const Background = styled.aside`
@@ -77,6 +77,6 @@ export const Switch = styled.span<ThemeButtonProps>`
         border-radius: 50px;
         background-color: white;
         transition: all .3s;
-        margin-left: ${({darkMode}) => darkMode ? '50%' : '0%'};
+        margin-left: ${({darkmode}) => darkmode ? '50%' : ''};
     }
 `

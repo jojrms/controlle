@@ -51,7 +51,7 @@ export const MenuLeft = () => {
                         <img width={'24px'} height={'24px'} src={Moon}/>
                         Dark Mode
 
-                        <Switch darkMode={false}>
+                        <Switch darkmode={false}>
                             <span id="check"/>
                         </Switch>
                     </ThemeButton>
