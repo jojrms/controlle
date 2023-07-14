@@ -6,9 +6,10 @@ import {
     BottomOptions
 } from "./styled"
 
-import Dashboard from '../../images/menuLeft/Dashboard.svg';
-import Finance from '../../images/menuLeft/Finance.svg';
-import Settings from '../../images/menuLeft/Settings.svg';
+import { DashboardIcon } from "../../images/menuLeft/Dashboard";
+import { FinanceIcon } from "../../images/menuLeft/Finance";
+import { SettingsIcon } from "../../images/menuLeft/Settings";
+import { ExitIcon } from "../../images/menuLeft/Exit";
 
 export const MenuLeft = () => {
 
@@ -18,20 +19,27 @@ export const MenuLeft = () => {
 
             <List>
                 <Option selected={true}>
-                    <img width={"24px"} height={"24px"} src={Dashboard} alt="Dashboard icon"/>
+                    <DashboardIcon color="#000"/>
                     Dashboard  
                 </Option>
                 <Option selected={false}>
-                    <img width={"24px"} height={"24px"} src={Finance} alt="Finance icon"/>
+                    <FinanceIcon color="#000"/>
                     Financeiro  
                 </Option>
                 <Option selected={false}>
-                    <img width={"24px"} height={"24px"} src={Settings} alt="Settings icon"/>
+                    <SettingsIcon color="#000"/>
                     Configurações  
                 </Option>
             </List>
 
-            <BottomOptions></BottomOptions>
+            <BottomOptions>
+                <List>
+                    <Option style={{color: '#000'}} selected={false}>
+                        <ExitIcon color="#000"/>
+                        Sair  
+                    </Option>
+                </List>
+            </BottomOptions>
         </Background>
     )
 }
