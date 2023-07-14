@@ -20,6 +20,7 @@ export default {
     },
     border: {
         borderColor: '#E1E4EB',
-        borderRadius: '12px',
+        cardBorderRadius: '12px',
+        menuBorderRadius: '5px',
     }
 }
