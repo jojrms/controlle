@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 import { 
     Background,
     Icon,
@@ -8,6 +10,11 @@ import {
     Switch
 } from "./styled"
 
+import {
+    Link,
+    useParams
+} from "react-router-dom";
+
 import { DashboardIcon } from "../../images/menuLeft/Dashboard";
 import { FinanceIcon } from "../../images/menuLeft/Finance";
 import { SettingsIcon } from "../../images/menuLeft/Settings";
@@ -17,29 +24,39 @@ import Moon from '../../images/menuLeft/Moon.svg';
 
 export const MenuLeft = () => {
 
+    const {page} = useParams();
+
     return(
         <Background>
             <Icon/>
 
             <List>
-                <Option selected={true}>
-                    <DashboardIcon color="#000"/>
-                    Dashboard  
-                </Option>
-                <Option selected={false}>
-                    <FinanceIcon color="#000"/>
-                    Financeiro  
-                </Option>
-                <Option selected={false}>
-                    <SettingsIcon color="#000"/>
+                <Link to={"/dashboard"}>
+                    <Option selected={page === 'dashboard' ? true : false}>
+                        <DashboardIcon color={page === 'dashboard' ? '#fff' : '#949494'}/>
+                        Dashboard  
+                    </Option>        
+                </Link>
+                <Link to={"/finance"}>
+                    <Option selected={page === 'finance' ? true : false}>
+                        <FinanceIcon color={page === 'finance' ? '#fff' : '#949494'}/>
+                        Financeiro  
+                    </Option>    
+                </Link>
+                <Link to={"/settings"}>
+                <Option selected={page === 'settings' ? true : false}>
+                    <SettingsIcon color={page === 'settings' ? '#fff' : '#949494'}/>
                     Configurações  
-                </Option>
+                </Option>    
+                </Link>
+                
+                
             </List>
 
             <BottomOptions>
                 <List>
                     <Option style={{color: '#000'}} selected={false}>
-                        <ExitIcon color="#000"/>
+                        <ExitIcon color='#000'/>
                         Sair  
                     </Option>
                     <ThemeButton>
