@@ -22,7 +22,7 @@ export const Icon = styled.i`
     width: 100%;
     height: 100%;
     background-image: url(${IconUrl});
-    background-size: 50%;
+    background-size: 40%;
 `
 
 export const List = styled.ul`
