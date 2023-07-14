@@ -28,6 +28,7 @@ li, button{
 button, input{
     border: none;
     background-color: transparent;
+    font-family: Gilroy-Regular;
 }
 
 .divAppGrid{
