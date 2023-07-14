@@ -11,8 +11,10 @@ body, .App, #index{
     height: 100%;
     position: absolute;
     display: grid;
+    grid-template-columns: 250px auto;
+    grid-template-rows: 80px auto;
     grid-template-areas: 
-    "menu header header"
-    "menu content content"
-    "menu content content";
+    "menu header"
+    "menu content"
+    "menu content";
 }
