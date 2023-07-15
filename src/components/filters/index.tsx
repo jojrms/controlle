@@ -1,8 +1,11 @@
 import React from 'react';
 import {
     Container,
-    Label
+    Label,
+    AddFilter
 } from './styled';
+
+import AddIcon from '../../images/filter/Add.svg';
 
 import { Menu, MenuItem, MenuButton } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
@@ -21,9 +24,12 @@ export const InitialFilter = () => {
     }
 
     return(
-        <React.Fragment>
+        <Container>
             <Label>Tipo: </Label>
-            <Menu menuButton={<MenuButton>{returnValues()}</MenuButton>} transition>
+            <Menu arrow={false} menuButton={
+                <MenuButton style={{width: '10rem'}} className="szh-menu">
+                    {returnValues()}</MenuButton>
+                } transition>
                 <MenuItem 
                 checked={haveEntrada} 
                 onClick={(e) => setEntrada(e.checked ? true : false)}
@@ -33,24 +39,47 @@ export const InitialFilter = () => {
                 onClick={(e) => setSaida(e.checked ? true : false)}
                 type='checkbox'>Saída</MenuItem>
             </Menu>    
-        </React.Fragment>
+        </Container>
        
     )
 }
 
-export const CreateNewFilter = () => {
+type Filter = {
+    label: string;
+    MenuText: string;
+}
+
+export const Filter = ({label, MenuText} : Filter) => {
     return(
-        <React.Fragment>
-            <Label>Tipo: </Label>
-            <Menu menuButton={<MenuButton>Menu</MenuButton>} transition>
-                <MenuItem>Conta</MenuItem>
-                <MenuItem>Cartão de Crédito</MenuItem>
-                <MenuItem>Centro de Custo</MenuItem>
-                <MenuItem>Usuário</MenuItem>
-                <MenuItem>Valor</MenuItem>
-                <MenuItem>Tags</MenuItem>
-            </Menu>    
-        </React.Fragment>
-       
+        <Container>
+            <Label>{label}</Label>
+            <Menu arrow={false} menuButton={
+                <MenuButton style={{width: '10rem'}} className="szh-menu">{MenuText}</MenuButton>
+                } transition>
+                <MenuItem 
+                type='checkbox'>Entrada</MenuItem>
+                <MenuItem 
+                type='checkbox'>Saída</MenuItem>
+            </Menu>  
+        </Container>
+    )
+}
+
+type CreateNewFilterProps = {
+    setIsModalOpen: any
+}
+
+export const CreateNewFilter = ({setIsModalOpen} : CreateNewFilterProps) => {
+    return(
+        <Menu menuButton={
+            <AddFilter style={{width: '32px'}} className="szh-menu"></AddFilter>
+        } transition>
+            <MenuItem onClick={() => setIsModalOpen(true)}>Conta</MenuItem>
+            <MenuItem onClick={() => setIsModalOpen(true)}>Cartão de Crédito</MenuItem>
+            <MenuItem onClick={() => setIsModalOpen(true)}>Centro de Custo</MenuItem>
+            <MenuItem onClick={() => setIsModalOpen(true)}>Usuário</MenuItem>
+            <MenuItem onClick={() => setIsModalOpen(true)}>Valor</MenuItem>
+            <MenuItem onClick={() => setIsModalOpen(true)}>Tags</MenuItem>
+        </Menu>    
     )
 }

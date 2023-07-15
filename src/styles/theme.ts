@@ -23,6 +23,8 @@ export default {
         cards: '#FFFFFF',
         backgroundIcons: '#23272E',
         optionHover: '#e0e1e8',
+        confirmButton: '#3CCC10',
+        cancelButton: '#EF6D44'
     },
     border: {
         borderColor: '#E1E4EB',
