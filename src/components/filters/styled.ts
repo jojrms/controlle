@@ -5,3 +5,8 @@ export const Container = styled.div`
     height: 100px;
     display: grid;
 `
+
+export const Label = styled.label`
+    color: ${props => props.theme.fontColor.header.title};
+    font-weigth: 600;
+`

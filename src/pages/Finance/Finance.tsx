@@ -1,3 +1,4 @@
+import { InitialFilter, CreateNewFilter } from '../../components/filters'
 import {
     Background, Container
 } from './styled'
@@ -6,6 +7,8 @@ export const Finance = () => {
     return (
         <Background>
             <Container>
+                <InitialFilter/>
+                <CreateNewFilter/>
                 <button id='buttonDeleteFilters'>Zerar filtros</button>
                 <button id='buttonSaveFilters'>Salvar filtros</button>
             </Container>
