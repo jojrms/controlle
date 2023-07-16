@@ -1,0 +1,60 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "type": "saida",
+      "category": "Padaria e Cafeteria",
+      "bank": "Santander",
+      "datatime": "typicode",
+      "value": 89.90
+    },
+    {
+      "id": 2,
+      "type": "saida",
+      "category": "Restaurante",
+      "bank": "Bradesco",
+      "datatime": "typicode",
+      "value": 457.58
+    },
+    {
+      "id": 3,
+      "type": "entrada",
+      "category": "Restaurante",
+      "bank": "Sicredi",
+      "datatime": "typicode",
+      "value": 200.10
+    },
+    {
+      "id": 4,
+      "type": "saida",
+      "category": "Hotel",
+      "bank": "Bradesco",
+      "datatime": "typicode",
+      "value": 550.55
+    },
+    {
+      "id": 5,
+      "type": "entrada",
+      "category": "Padaria e Cafeteria",
+      "bank": "Bradesco",
+      "datatime": "typicode",
+      "value": 108.95
+    },
+    {
+      "id": 6,
+      "type": "saida",
+      "category": "Posto de Gasolina",
+      "bank": "Santander",
+      "datatime": "typicode",
+      "value": 100
+    },
+    {
+      "id": 7,
+      "type": "saida",
+      "category": "Spotify",
+      "bank": "Nubank",
+      "datatime": "typicode",
+      "value": 17.25
+    }
+  ]
+}
