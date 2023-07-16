@@ -11,10 +11,14 @@ import { Menu, MenuItem, MenuButton } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 
-export const InitialFilter = () => {
+type InitialFilter = {
+    haveEntrada: boolean,
+    setEntrada: any,
+    haveSaida: boolean,
+    setSaida: any
+}
 
-    const [haveEntrada, setEntrada] = React.useState<boolean>(true);
-    const [haveSaida, setSaida] = React.useState<boolean>(false);
+export const InitialFilter = ({haveEntrada, setEntrada, haveSaida, setSaida} : InitialFilter) => {
 
     const returnValues = () => {
         if(haveEntrada && !haveSaida) return "Entrada";
