@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useReducer} from 'react';
 import {
     Container,
     Label,
@@ -12,19 +12,19 @@ import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 
 type InitialFilter = {
-    haveEntrada: boolean,
-    setEntrada: any,
-    haveSaida: boolean,
-    setSaida: any
+    state: any,
+    handleFilterChange: any,
 }
 
-export const InitialFilter = ({haveEntrada, setEntrada, haveSaida, setSaida} : InitialFilter) => {
+export const InitialFilter = ({state, handleFilterChange} : InitialFilter) => {
+
+    console.log(state, handleFilterChange, 'bbbbbbbb')
 
     const returnValues = () => {
-        if(haveEntrada && !haveSaida) return "Entrada";
-        if(!haveEntrada && haveSaida) return "Saída";
-        if(!haveEntrada && !haveSaida) return "Escolha um tipo";
-        if(haveEntrada && haveSaida) return "Entrada, Saída";
+        if(state.entrada && !state.saida) return "Entrada";
+        if(!state.entrada && state.saida) return "Saída";
+        if(!state.entrada && !state.saida) return "Escolha um tipo";
+        if(state.entrada && state.saida) return "Entrada, Saída";
     }
 
     return(
@@ -35,12 +35,12 @@ export const InitialFilter = ({haveEntrada, setEntrada, haveSaida, setSaida} : I
                     {returnValues()}</MenuButton>
                 } transition>
                 <MenuItem 
-                checked={haveEntrada} 
-                onClick={(e) => setEntrada(e.checked ? true : false)}
+                checked={state.entrada} 
+                onClick={(e) => handleFilterChange("Entrada", e.checked)}
                 type='checkbox'>Entrada</MenuItem>
                 <MenuItem 
-                checked={haveSaida} 
-                onClick={(e) => setSaida(e.checked ? true : false)}
+                checked={state.saida} 
+                onClick={(e) => handleFilterChange("Saida", e.checked)}
                 type='checkbox'>Saída</MenuItem>
             </Menu>    
         </Container>
@@ -70,20 +70,19 @@ export const Filter = ({label, MenuText} : Filter) => {
 }
 
 type CreateNewFilterProps = {
-    setIsModalOpen: any
+    CreateNewFilterFunction: any
 }
 
-export const CreateNewFilter = ({setIsModalOpen} : CreateNewFilterProps) => {
+export const CreateNewFilter = ({CreateNewFilterFunction} : CreateNewFilterProps) => {
     return(
         <Menu menuButton={
             <AddFilter style={{width: '32px'}} className="szh-menu"></AddFilter>
         } transition>
-            <MenuItem onClick={() => setIsModalOpen(true)}>Conta</MenuItem>
-            <MenuItem onClick={() => setIsModalOpen(true)}>Cartão de Crédito</MenuItem>
-            <MenuItem onClick={() => setIsModalOpen(true)}>Centro de Custo</MenuItem>
-            <MenuItem onClick={() => setIsModalOpen(true)}>Usuário</MenuItem>
-            <MenuItem onClick={() => setIsModalOpen(true)}>Valor</MenuItem>
-            <MenuItem onClick={() => setIsModalOpen(true)}>Tags</MenuItem>
+            <MenuItem onClick={() => CreateNewFilterFunction('Conta')}>Conta</MenuItem>
+            <MenuItem onClick={() => CreateNewFilterFunction('Credit_card')}>Cartão de Crédito</MenuItem>
+            <MenuItem onClick={() => CreateNewFilterFunction('User')}>Usuário</MenuItem>
+            <MenuItem onClick={() => CreateNewFilterFunction('Value')}>Valor</MenuItem>
+            <MenuItem onClick={() => CreateNewFilterFunction('Tags')}>Tags</MenuItem>
         </Menu>    
     )
 }

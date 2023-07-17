@@ -10,8 +10,6 @@ import {
 
 import Axios from 'axios';
 
-import { Modal } from '../../components/modal';
-
 type TransactionsProps = {
     id: number,
     type: string,
@@ -21,10 +19,25 @@ type TransactionsProps = {
     value: number
 }
 
+type FilterState = {
+    entrada: boolean,
+    saida: boolean,
+};
+  
+type FilterAction = 
+    | { 
+        type: 'SET_DATA_TYPE_FILTER_ENTRADA',
+        payload_entrada: boolean, 
+    }
+    | { 
+        type: 'SET_DATA_TYPE_FILTER_SAIDA',
+        payload_saida: boolean, 
+    }
+
+
 export const Finance = () => {
 
     const [haveNewFilter, setHaveNewFilter] = React.useState<boolean>(false);
-    const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
 
     const [haveEntrada, setEntrada] = React.useState<boolean>(true);
     const [haveSaida, setSaida] = React.useState<boolean>(false);
@@ -61,9 +74,8 @@ export const Finance = () => {
             sortable: true,
         },
         {
-            name: '',
+            name: 'Ação',
             selector: (row: any) => row.action,
-            sortable: true,
         },
     ];
 
@@ -73,16 +85,13 @@ export const Finance = () => {
         await Axios.get('http://localhost:3000/transactions').then( res => {
 
             const result = res.data;
-
             if(haveEntrada && haveSaida) return setTransactions(result);
-
             if(!haveEntrada && haveSaida) {
-                console.log('aaaaa entrou aqui')
                 const filteredResult = result.filter( (res: any) => {
                     return res.type === 'saida'
                 });
-                console.log(transactions, filteredResult, 'filteredResult')
 
+                console.log(filteredResult, 'dados de saida')
                 setTransactions(filteredResult);
             }
 
@@ -90,6 +99,7 @@ export const Finance = () => {
                 const filteredResult = result.filter( (res: any) => {
                     return res.type === 'entrada'
                 });
+                console.log(filteredResult, 'dados de entrada')
                 setTransactions(filteredResult);
             }
 
@@ -99,6 +109,33 @@ export const Finance = () => {
 
     }
 
+    const initialState: FilterState = {
+        entrada: false,
+        saida: false,
+    };
+    function filterReducer(state: FilterState, action: FilterAction): FilterState {
+        switch (action.type) {
+          case 'SET_DATA_TYPE_FILTER_ENTRADA':
+            return { ...state, entrada: action.payload_entrada};
+        case 'SET_DATA_TYPE_FILTER_SAIDA':
+            return { ...state, saida: action.payload_saida};
+          default:
+            return state;
+        }
+    }
+    const handleFilterChange = (type: string, value: boolean) => {
+        switch(type){
+            case "Entrada": return dispatch({ type: 'SET_DATA_TYPE_FILTER_ENTRADA', payload_entrada: value});
+            case "Saida": return dispatch({ type: 'SET_DATA_TYPE_FILTER_SAIDA', payload_saida: value});
+        }
+        
+    };
+    const [state, dispatch] = React.useReducer(filterReducer, initialState);
+
+    const CreateNewFilterFunction = (type: string) => {
+        setHaveNewFilter(true);
+    }
+
     React.useEffect( () => {
         searchData();
     }, [haveEntrada, haveSaida])
@@ -106,16 +143,15 @@ export const Finance = () => {
     return (
         <Background>
 
-            {isModalOpen && <Modal setIsModalOpen={setIsModalOpen}/>}
-
             <Container>
                 <FiltersGrid>
                     <InitialFilter
-                        haveEntrada={haveEntrada} setEntrada={setEntrada}
-                        haveSaida={haveSaida} setSaida={setSaida}
+                        handleFilterChange={handleFilterChange}
+                        state={state}
                     />
-                    {/* <Filter label='Conta' MenuText='teste'/> */}
-                    <CreateNewFilter setIsModalOpen={setIsModalOpen}/>    
+                    {haveNewFilter && <p>aaa</p>}
+                    {!haveNewFilter &&
+                    <CreateNewFilter CreateNewFilterFunction={CreateNewFilterFunction}/>}
                 </FiltersGrid>
                 
                 <button id='buttonDeleteFilters'>Zerar filtros</button>
