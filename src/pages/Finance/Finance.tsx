@@ -56,7 +56,7 @@ export const Finance = () => {
             const result = res.data;
             if(state.entrada && state.saida){
                 const moreFilter = result.filter( (res: any) => {
-                    return newFilterType.type === 'Account' ? res.bank === newFilterType.value : res.pay === newFilterType.value
+                    return newFilterType.type === 'Account' ? res.bank === newFilterType.value : newFilterType.type === 'Credit_card' ? res.pay === newFilterType.value : res.category === newFilterType.value
                 })
 
                 console.log(moreFilter, 'dados gerais')
@@ -69,7 +69,7 @@ export const Finance = () => {
                 });
 
                 const moreFilter = filteredResult.filter( (res: any) => {
-                    return newFilterType.type === 'Account' ? res.bank === newFilterType.value : res.pay === newFilterType.value
+                    return newFilterType.type === 'Account' ? res.bank === newFilterType.value : newFilterType.type === 'Credit_card' ? res.pay === newFilterType.value : res.category === newFilterType.value
                 })
 
                 console.log(moreFilter, 'dados de saida')
@@ -82,7 +82,7 @@ export const Finance = () => {
                 });
 
                 const moreFilter = filteredResult.filter( (res: any) => {
-                    return newFilterType.type === 'Account' ? res.bank === newFilterType.value : res.pay === newFilterType.value
+                    return newFilterType.type === 'Account' ? res.bank === newFilterType.value : newFilterType.type === 'Credit_card' ? res.pay === newFilterType.value : res.category === newFilterType.value
                 })
 
                 console.log(moreFilter, 'dados de entrada')
@@ -143,7 +143,7 @@ export const Finance = () => {
         switch(newFilterType.type){
             case "Account": return "Conta";
             case "Credit_card": return "Cartão";
-            case "User": return "Usuário";
+            case "Type": return "Tipo";
             case "Value": return "Valor";
             case "Tags": return "Tags";
             default: return "Filtro"
@@ -163,6 +163,11 @@ export const Finance = () => {
         {value: "Cartão de Crédito"},
         {value: "Cartão de Débito"},
     ]
+    const Type: SelectItem[] = [
+        {value: "Hotel"},
+        {value: "Restaurante"},
+        {value: "Posto de Gasolina"},
+    ]
 
     return (
         <Background>
@@ -175,7 +180,7 @@ export const Finance = () => {
                     />
                     {newFilterType.type &&
                         <NewFilter 
-                        items={newFilterType.type === "Account" ? BanksOptions : Card}
+                        items={newFilterType.type === "Account" ? BanksOptions : newFilterType.type === "Credit_card" ? Card : Type}
                         label={returnLabelInNewFilter()}
                         newFilterType={newFilterType}
                         handleNewFilterTypeChange={handleNewFilterTypeChange}/>

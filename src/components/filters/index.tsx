@@ -92,9 +92,14 @@ export const CreateNewFilter = ({handleNewFilterTypeChange, setNewFilterType} : 
         {value: "Cartão de Crédito"},
         {value: "Cartão de Débito"},
     ]
+    const Type: SelectItem[] = [
+        {value: "Hotel"},
+        {value: "Restaurante"},
+        {value: "Posto de Gasolina"},
+    ]
 
     const setNewFilter = (type: string) => {
-        handleNewFilterTypeChange(type, type === 'Account' ? BanksOptions[0].value : Card[0].value)
+        handleNewFilterTypeChange(type, type === 'Account' ? BanksOptions[0].value : type === 'Credit_card' ? Card[0].value : Type[0].value)
         setNewFilterType(type, type === 'Account' ? BanksOptions[0].value : Card[0].value)
     }
     return(
@@ -103,7 +108,7 @@ export const CreateNewFilter = ({handleNewFilterTypeChange, setNewFilterType} : 
         } transition>
             <MenuItem onClick={() => setNewFilter('Account')}>Conta</MenuItem>
             <MenuItem onClick={() => setNewFilter('Credit_card')}>Cartão</MenuItem>
-            <MenuItem onClick={() => setNewFilter('User')} disabled={true}>Usuário</MenuItem>
+            <MenuItem onClick={() => setNewFilter('Type')}>Tipo</MenuItem>
             <MenuItem onClick={() => setNewFilter('Value')} disabled={true}>Valor</MenuItem>
             <MenuItem onClick={() => setNewFilter('Tag')} disabled={true}>Tags</MenuItem>
         </Menu>    
