@@ -17,6 +17,7 @@ type TransactionsProps = {
     category: string,
     bank: string,
     datatime: string,
+    pay: string,
     value: number
 }
 
@@ -48,55 +49,30 @@ export const Finance = () => {
     const [transactions, setTransactions] = React.useState<TransactionsProps[]>([]);
 
     const searchData = async () => {
-        await Axios.get('http://localhost:3000/transactions').then( res => {
-
-        console.log(newFilterType)
-
-            const result = res.data;
-            if(state.entrada && state.saida){
-                const moreFilter = result.filter( (res: any) => {
-                    return newFilterType.type === 'Account' ? res.bank === newFilterType.value : res.pay === newFilterType.value
-                })
-
-                console.log(moreFilter, 'dados gerais')
-                setTransactions(newFilterType.type ? moreFilter : result);
-
-            }
-            if(!state.entrada && state.saida) {
-                const filteredResult = result.filter( (res: any) => {
-                    return res.type === 'saida'
-                });
-
-                const moreFilter = filteredResult.filter( (res: any) => {
-                    return newFilterType.type === 'Account' ? res.bank === newFilterType.value : res.pay === newFilterType.value
-                })
-
-                console.log(moreFilter, 'dados de saida')
+        try {
+            const response = await Axios.get('http://localhost:3000/transactions');
+            const result = response.data;
+            const filteredResult = state.saida ? result.filter((res : TransactionsProps) => res.type === 'saida') : result;
+            const moreFilter = filteredResult.filter((res : TransactionsProps) => 
+                newFilterType.type === 'Account' ? res.bank === newFilterType.value : res.pay === newFilterType.value
+            );
+    
+            if (state.entrada && state.saida) {
+                console.log(moreFilter, 'dados gerais');
                 setTransactions(newFilterType.type ? moreFilter : filteredResult);
-            }
-
-            if(state.entrada && !state.saida) {
-                const filteredResult = result.filter( (res: any) => {
-                    return res.type === 'entrada'
-                });
-
-                const moreFilter = filteredResult.filter( (res: any) => {
-                    return newFilterType.type === 'Account' ? res.bank === newFilterType.value : res.pay === newFilterType.value
-                })
-
-                console.log(moreFilter, 'dados de entrada')
+            } else if (state.entrada && !state.saida) {
+                console.log(moreFilter, 'dados de entrada');
                 setTransactions(newFilterType.type ? moreFilter : filteredResult);
-            }
-
-            if(!state.entrada && !state.saida) {
+            } else if (!state.entrada && state.saida) {
+                console.log(moreFilter, 'dados de saida');
+                setTransactions(newFilterType.type ? moreFilter : filteredResult);
+            } else {
                 setTransactions([]);
             }
-
-        }).catch( err => {
-            console.log(err, 'error')
-        });
-
-    }
+        } catch (error) {
+            console.log(error, 'error');
+        }
+    };
 
     const initialState: FilterState = {
         entrada: true,
