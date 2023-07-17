@@ -5,7 +5,8 @@ import {
     AddFilter
 } from './styled';
 
-import AddIcon from '../../images/filter/Add.svg';
+import {useSelect} from 'downshift'
+import Select, { SelectItem } from './select/index';
 
 import { Menu, MenuItem, MenuButton } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
@@ -48,23 +49,43 @@ export const InitialFilter = ({state, handleFilterChange} : InitialFilter) => {
     )
 }
 
-type Filter = {
+type NewFilterAccountProps = {
+    account: string,
+}
+type NewFilterProps = {
     label: string;
-    MenuText: string;
+    items?: Array<NewFilterAccountProps>,
 }
 
-export const Filter = ({label, MenuText} : Filter) => {
+const options: SelectItem[] = [
+    { label: 'Option 1', value: 'option1' },
+    { label: 'Option 2', value: 'option2' },
+    { label: 'Option 3', value: 'option3' },
+];
+
+export const NewFilter = ({label, items} : NewFilterProps) => {
+
+    const [selectedItem, setSelectedItem] = React.useState<SelectItem | null | undefined>(null);
+
+    const handleSelectItem = (selectedItem: SelectItem | null | undefined) => {
+        setSelectedItem(selectedItem);
+    };
+
     return(
         <Container>
-            <Label>{label}</Label>
-            <Menu arrow={false} menuButton={
-                <MenuButton style={{width: '10rem'}} className="szh-menu">{MenuText}</MenuButton>
+            <Select label={label} items={options} onSelectItem={handleSelectItem}/>
+            {/* <useSelect></useSelect> */}
+            {/* <Menu arrow={true} menuButton={
+                
+                <MenuButton style={{width: '10rem'}} className="szh-menu">{items[0].account}</MenuButton>
                 } transition>
-                <MenuItem 
-                type='checkbox'>Entrada</MenuItem>
-                <MenuItem 
-                type='checkbox'>Saída</MenuItem>
-            </Menu>  
+                    {items.map( item => {
+                        return(
+                            <MenuItem 
+                            type='checkbox'>{item.account}</MenuItem>
+                        )
+                    })}
+            </Menu>   */}
         </Container>
     )
 }

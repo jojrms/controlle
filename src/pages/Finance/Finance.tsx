@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { InitialFilter, CreateNewFilter, Filter } from '../../components/filters'
+import { InitialFilter, CreateNewFilter, NewFilter } from '../../components/filters'
 import {
     Background, 
     Container,
@@ -20,7 +20,7 @@ type TransactionsProps = {
 }
 
 type NewFilterType = {
-    type: "Account" | "Credit_card" | "User" | "Value" | "Tags" | ""
+    type: "Account" | "Credit_card" | "User" | "Value" | "Tags" | null
 }
 type NewFilterTypeActions = 
 | {type: "SET_FILTER_TYPE_ACCOUNT", payload: "Account" | "Credit_card" | "User" | "Value" | "Tags" | ""}
@@ -102,7 +102,7 @@ export const Finance = () => {
 
     // DEFINIÇÃO DO OUTRO FILTRO
     const NewFilterState: NewFilterType = {
-        type: ""
+        type: null
     }
     function NewFilterReducer(state: NewFilterType, action: NewFilterTypeActions): NewFilterType {
         switch (action.payload) {
@@ -131,11 +131,27 @@ export const Finance = () => {
         }
         
     };
-    
+    const returnLabelInNewFilter = () => {
+        switch(newFilterType.type){
+            case "Account": return "Conta";
+            case "Credit_card": return "Cartão de Crédito";
+            case "User": return "Usuário";
+            case "Value": return "Valor";
+            case "Tags": return "Tags";
+            default: return "Filtro"
+        }
+    }
+     console.log(newFilterType, 'newFilterType.type')
 
     React.useEffect( () => {
         searchData();
     }, [state.entrada, state.saida])
+
+    const BanksOptions = [
+        {name: "Banco do Brasil"},
+        {name: "Bradesco"},
+        {name: "Santander"},
+    ]
 
     return (
         <Background>
@@ -146,6 +162,8 @@ export const Finance = () => {
                         handleFilterChange={handleFilterChange}
                         state={state}
                     />
+                    {newFilterType.type &&
+                    <NewFilter label={returnLabelInNewFilter()}/>}
                     <CreateNewFilter handleNewFilterTypeChange={handleNewFilterTypeChange}/>
                 </FiltersGrid>
                 
