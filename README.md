@@ -26,7 +26,10 @@ Node = foi utilizado o 18.16.1
 
 
 ## COMO INICIAR
-### 1. START O SERVIDOR FALSO
+## OBS.: CERTIFIQUE-SE DE UTILIZAR O NODE 18.16.1
+### 1. INSTALAÇÃO DOS MÓDULOS NODE
+Execute `npm i` para instalar todos os node_modules
+### 2. START O SERVIDOR FALSO
 Execute `json-server --watch db.json` para a biblioteca subir o servidor falso a ser utilizado
-### 2. START O REACT
+### 1. START O REACT
 Com o servidor no localhost, inicie o React com `npm start`.
