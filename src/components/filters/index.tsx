@@ -54,14 +54,8 @@ type NewFilterAccountProps = {
 }
 type NewFilterProps = {
     label: string;
-    items?: Array<NewFilterAccountProps>,
+    items: Array<SelectItem>,
 }
-
-const options: SelectItem[] = [
-    { label: 'Option 1', value: 'option1' },
-    { label: 'Option 2', value: 'option2' },
-    { label: 'Option 3', value: 'option3' },
-];
 
 export const NewFilter = ({label, items} : NewFilterProps) => {
 
@@ -73,7 +67,7 @@ export const NewFilter = ({label, items} : NewFilterProps) => {
 
     return(
         <Container>
-            <Select label={label} items={options} onSelectItem={handleSelectItem}/>
+            <Select label={label} items={items} onSelectItem={handleSelectItem}/>
             {/* <useSelect></useSelect> */}
             {/* <Menu arrow={true} menuButton={
                 

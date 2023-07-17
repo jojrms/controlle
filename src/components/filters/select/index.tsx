@@ -4,8 +4,7 @@ import { Container, FilterButton, Label } from '../styled';
 
 // Interface para o item do select
 export interface SelectItem {
-  label: string;
-  value: string;
+  value: string
 }
 
 // Props para o componente Select
@@ -36,7 +35,7 @@ const Select: React.FC<SelectProps> = ({ label, items, onSelectItem }) => {
             <Label {...getLabelProps()}>{label}</Label>
             <FilterButton
                 {...getToggleButtonProps()}>
-                <span>{selectedItem ? selectedItem.label : 'Elements'}</span>
+                <span>{selectedItem ? selectedItem.value : 'Elements'}</span>
             </FilterButton>
         </React.Fragment>
         <ul
@@ -51,8 +50,7 @@ const Select: React.FC<SelectProps> = ({ label, items, onSelectItem }) => {
                 key={`${item.value}${index}`}
                 {...getItemProps({item, index})}
               >
-                <span>{item.label}</span>
-                <span className="text-sm text-gray-700">{item.label}</span>
+                <span>{item.value}</span>
               </li>
             ))}
         </ul>

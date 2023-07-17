@@ -1,4 +1,5 @@
 import React from 'react';
+import { SelectItem } from '../../components/filters/select';
 
 import { InitialFilter, CreateNewFilter, NewFilter } from '../../components/filters'
 import {
@@ -147,10 +148,14 @@ export const Finance = () => {
         searchData();
     }, [state.entrada, state.saida])
 
-    const BanksOptions = [
-        {name: "Banco do Brasil"},
-        {name: "Bradesco"},
-        {name: "Santander"},
+    const BanksOptions: SelectItem[] = [
+        {value: "Banco do Brasil"},
+        {value: "Bradesco"},
+        {value: "Santander"},
+    ]
+    const Card: SelectItem[] = [
+        {value: "Cartão de Crédito"},
+        {value: "Cartão de Débito"},
     ]
 
     return (
@@ -163,7 +168,7 @@ export const Finance = () => {
                         state={state}
                     />
                     {newFilterType.type &&
-                    <NewFilter label={returnLabelInNewFilter()}/>}
+                    <NewFilter items={newFilterType.type === "Account" ? BanksOptions : Card} label={returnLabelInNewFilter()}/>}
                     <CreateNewFilter handleNewFilterTypeChange={handleNewFilterTypeChange}/>
                 </FiltersGrid>
                 

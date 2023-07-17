@@ -46,10 +46,6 @@ export const Table = ({data} : TableProps) => {
             selector: (row: any) => row.value,
             sortable: true,
         },
-        {
-            name: 'Ação',
-            selector: (row: any) => row.action,
-        },
     ];
 
     return(
