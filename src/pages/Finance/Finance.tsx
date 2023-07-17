@@ -67,6 +67,10 @@ export const Finance = () => {
                 setTransactions(filteredResult);
             }
 
+            if(!state.entrada && !state.saida) {
+                setTransactions([]);
+            }
+
         }).catch( err => {
             console.log(err, 'error')
         });
