@@ -13,7 +13,7 @@ import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 
 type InitialFilter = {
-    state: any,
+    state: {entrada: boolean, saida: boolean},
     handleFilterChange: any,
 }
 
@@ -50,15 +50,18 @@ export const InitialFilter = ({state, handleFilterChange} : InitialFilter) => {
 type NewFilterAccountProps = {
     account: string,
 }
+type NewFilterTypeProps = {
+    type: string | null,
+    value: string | null
+}
 type NewFilterProps = {
     label: string;
     items: Array<SelectItem>,
-    newFilterType: any,
+    newFilterType: NewFilterTypeProps,
     handleNewFilterTypeChange: any,
 }
 
 export const NewFilter = ({label, items, newFilterType, handleNewFilterTypeChange} : NewFilterProps) => {
-
 
     const [selectedItem, setSelectedItem] = React.useState<SelectItem | null | undefined>(null);
 

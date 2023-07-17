@@ -7,12 +7,17 @@ export interface SelectItem {
   value: string
 }
 
+type NewFilterTypeProps = {
+  type: string | null,
+  value: string | null
+}
+
 // Props para o componente Select
 interface SelectProps {
     label: string,
     items: SelectItem[];
     handleNewFilterTypeChange: any,
-    newFilterType: any,
+    newFilterType: NewFilterTypeProps,
     onSelectItem: (selectedItem: SelectItem | null | undefined) => void;
 }
 

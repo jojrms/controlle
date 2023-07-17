@@ -59,14 +59,14 @@ export const MenuLeft = () => {
                         <ExitIcon color='#000'/>
                         Sair  
                     </Option>
-                    <ThemeButton>
+                    {/* <ThemeButton>
                         <img width={'24px'} height={'24px'} src={Moon}/>
                         Dark Mode
 
                         <Switch darkmode={false}>
                             <span id="check"/>
                         </Switch>
-                    </ThemeButton>
+                    </ThemeButton> */}
                 </List>
             </BottomOptions>
         </Background>
