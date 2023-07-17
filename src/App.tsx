@@ -15,6 +15,8 @@ function App() {
   
   const {page} = useParams();
 
+  console.log(page, 'aaa')
+
   const Page = () => {
     switch(page){
       case 'dashboard': return <Dashboard/>;
