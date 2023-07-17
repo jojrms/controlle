@@ -38,7 +38,7 @@ export const MenuLeft = () => {
                     </Option>        
                 </Link>
                 <Link to={"/finance"}>
-                    <Option selected={page === 'finance' ? true : false}>
+                    <Option selected={page === 'finance' || undefined ? true : false}>
                         <FinanceIcon color={page === 'finance' ? '#fff' : '#949494'}/>
                         Financeiro  
                     </Option>    

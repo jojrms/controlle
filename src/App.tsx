@@ -4,7 +4,8 @@ import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 
 import {
-  useParams
+  useParams,
+  useNavigate
 } from "react-router-dom";
 import { MenuLeft } from './components/menuLeft';
 import { Header } from './components/header';
@@ -14,13 +15,17 @@ import { Finance } from './pages/Finance/Finance';
 function App() {
   
   const {page} = useParams();
+  const navigate = useNavigate();
 
-  console.log(page, 'aaa')
+  if(page === undefined){
+    navigate('/finance')
+  };
 
   const Page = () => {
     switch(page){
       case 'dashboard': return <Dashboard/>;
       case 'finance': return <Finance/>;
+      case undefined: return <Finance/>;
     }
   }
 
@@ -28,6 +33,7 @@ function App() {
     switch (page) {
         case 'dashboard' : return "Dashboard";
         case 'finance' : return "Financeiro";
+        case undefined : return "Financeiro";
         case 'settings' : return "Configurações";
     }
   }

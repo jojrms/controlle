@@ -33,5 +33,7 @@ Node = foi utilizado o 18.16.1
 Execute `npm i` para instalar todos os node_modules
 ### 2. START O SERVIDOR FALSO
 Execute `json-server --watch db.json` para a biblioteca subir o servidor falso a ser utilizado
-### 1. START O REACT
-Com o servidor no localhost, inicie o React com `npm start`.
+### 3. START O REACT
+Com o servidor no localhost, inicie o React com `npm start`. Ele será executado no localhost:3001
+
+Acesse a rota de financeiro pela url: `/finance`
