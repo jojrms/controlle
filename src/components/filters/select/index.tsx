@@ -41,14 +41,11 @@ const Select: React.FC<SelectProps> = ({ label, items, newFilterType, handleNewF
             <Label {...getLabelProps()}>{label}</Label>
             <FilterButton
                 {...getToggleButtonProps()}>
-                <span>{selectedItem ? selectedItem.value : items[0].value}</span>
+                <span>{newFilterType.value ? newFilterType.value : items[0].value}</span>
             </FilterButton>
         </React.Fragment>
         <FilterOptions
           isOpen={isOpen}
-          className={`absolute w-72 bg-white mt-1 shadow-md max-h-80 overflow-scroll p-0 z-10 ${
-            !isOpen && 'hidden'
-          }`}
           {...getMenuProps()}
         >
           {isOpen &&
