@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelect } from 'downshift';
-import { Container, FilterButton, Label } from '../styled';
+import { Container, FilterButton, Label, FilterOptions } from '../styled';
 
 // Interface para o item do select
 export interface SelectItem {
@@ -44,7 +44,8 @@ const Select: React.FC<SelectProps> = ({ label, items, newFilterType, handleNewF
                 <span>{selectedItem ? selectedItem.value : items[0].value}</span>
             </FilterButton>
         </React.Fragment>
-        <ul
+        <FilterOptions
+          isOpen={isOpen}
           className={`absolute w-72 bg-white mt-1 shadow-md max-h-80 overflow-scroll p-0 z-10 ${
             !isOpen && 'hidden'
           }`}
@@ -63,7 +64,7 @@ const Select: React.FC<SelectProps> = ({ label, items, newFilterType, handleNewF
                 )
               
 })}
-        </ul>
+        </FilterOptions>
       </Container>
   );
 };

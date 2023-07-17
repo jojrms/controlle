@@ -40,7 +40,7 @@ export const FilterButton = styled.div`
     border: none;
     border-radius: 0.25rem;
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.133), 0 0.6px 2px rgba(0, 0, 0, 0.1);
-    min-width: 10rem;
+    min-width: 12rem;
     padding: 0.5rem 0;
     background-color: white;
     text-align: center;
@@ -48,3 +48,27 @@ export const FilterButton = styled.div`
     font-size: 14px;
 `
 
+type FilterOptionProps = {
+    isOpen: boolean
+}
+export const FilterOptions = styled.ul<FilterOptionProps>`
+    width: 12rem;
+    background-color: white;
+    position: white;
+    border: none;
+    border-radius: 0.25rem;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.133), 0 0.6px 2px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 100;
+    color: #54657D;
+    font-size: 16px;
+    padding: ${({isOpen}) => isOpen && '0.5rem 0'};
+    margin: 55px 0px 0px 10px;
+
+    li{
+        padding: 0.375rem 1.5rem;
+        transition-property: background-color, color;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+    }
+`
