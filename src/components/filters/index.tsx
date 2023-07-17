@@ -70,19 +70,19 @@ export const Filter = ({label, MenuText} : Filter) => {
 }
 
 type CreateNewFilterProps = {
-    CreateNewFilterFunction: any
+    handleNewFilterTypeChange: any
 }
 
-export const CreateNewFilter = ({CreateNewFilterFunction} : CreateNewFilterProps) => {
+export const CreateNewFilter = ({handleNewFilterTypeChange} : CreateNewFilterProps) => {
     return(
         <Menu menuButton={
             <AddFilter style={{width: '32px'}} className="szh-menu"></AddFilter>
         } transition>
-            <MenuItem onClick={() => CreateNewFilterFunction('Conta')}>Conta</MenuItem>
-            <MenuItem onClick={() => CreateNewFilterFunction('Credit_card')}>Cartão de Crédito</MenuItem>
-            <MenuItem onClick={() => CreateNewFilterFunction('User')}>Usuário</MenuItem>
-            <MenuItem onClick={() => CreateNewFilterFunction('Value')}>Valor</MenuItem>
-            <MenuItem onClick={() => CreateNewFilterFunction('Tags')}>Tags</MenuItem>
+            <MenuItem onClick={() => handleNewFilterTypeChange('Account')}>Conta</MenuItem>
+            <MenuItem onClick={() => handleNewFilterTypeChange('Credit_card')}>Cartão de Crédito</MenuItem>
+            <MenuItem onClick={() => handleNewFilterTypeChange('User')}>Usuário</MenuItem>
+            <MenuItem onClick={() => handleNewFilterTypeChange('Value')}>Valor</MenuItem>
+            <MenuItem onClick={() => handleNewFilterTypeChange('Tags')}>Tags</MenuItem>
         </Menu>    
     )
 }

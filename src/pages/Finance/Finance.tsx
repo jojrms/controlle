@@ -1,5 +1,4 @@
 import React from 'react';
-import DataTable from 'react-data-table-component';
 
 import { InitialFilter, CreateNewFilter, Filter } from '../../components/filters'
 import {
@@ -9,6 +8,7 @@ import {
 } from './styled';
 
 import Axios from 'axios';
+import { Table } from '../../components/table';
 
 type TransactionsProps = {
     id: number,
@@ -19,11 +19,17 @@ type TransactionsProps = {
     value: number
 }
 
+type NewFilterType = {
+    type: "Account" | "Credit_card" | "User" | "Value" | "Tags" | ""
+}
+type NewFilterTypeActions = 
+| {type: "SET_FILTER_TYPE_ACCOUNT", payload: "Account" | "Credit_card" | "User" | "Value" | "Tags" | ""}
+
+
 type FilterState = {
     entrada: boolean,
     saida: boolean,
 };
-  
 type FilterAction = 
     | { 
         type: 'SET_DATA_TYPE_FILTER_ENTRADA',
@@ -37,56 +43,14 @@ type FilterAction =
 
 export const Finance = () => {
 
-    const [haveNewFilter, setHaveNewFilter] = React.useState<boolean>(false);
-
-    const [haveEntrada, setEntrada] = React.useState<boolean>(true);
-    const [haveSaida, setSaida] = React.useState<boolean>(false);
-
-    const columns = [
-        {
-            name: 'Transação',
-            selector: (row: any) => row.id,
-            sortable: true,
-        },
-        {
-            name: 'Tipo',
-            selector: (row: any) => row.type,
-            sortable: true,
-        },
-        {
-            name: 'Categoria',
-            selector: (row: any) => row.category,
-            sortable: true,
-        },
-        {
-            name: 'Banco',
-            selector: (row: any) => row.bank,
-            sortable: true,
-        },
-        {
-            name: 'Data',
-            selector: (row: any) => row.datatime,
-            sortable: true,
-        },
-        {
-            name: 'Valor',
-            selector: (row: any) => row.value,
-            sortable: true,
-        },
-        {
-            name: 'Ação',
-            selector: (row: any) => row.action,
-        },
-    ];
-
     const [transactions, setTransactions] = React.useState<TransactionsProps[]>([]);
 
     const searchData = async () => {
         await Axios.get('http://localhost:3000/transactions').then( res => {
 
             const result = res.data;
-            if(haveEntrada && haveSaida) return setTransactions(result);
-            if(!haveEntrada && haveSaida) {
+            if(state.entrada && state.saida) return setTransactions(result);
+            if(!state.entrada && state.saida) {
                 const filteredResult = result.filter( (res: any) => {
                     return res.type === 'saida'
                 });
@@ -95,7 +59,7 @@ export const Finance = () => {
                 setTransactions(filteredResult);
             }
 
-            if(haveEntrada && !haveSaida) {
+            if(state.entrada && !state.saida) {
                 const filteredResult = result.filter( (res: any) => {
                     return res.type === 'entrada'
                 });
@@ -110,8 +74,8 @@ export const Finance = () => {
     }
 
     const initialState: FilterState = {
-        entrada: false,
-        saida: false,
+        entrada: true,
+        saida: true,
     };
     function filterReducer(state: FilterState, action: FilterAction): FilterState {
         switch (action.type) {
@@ -128,17 +92,46 @@ export const Finance = () => {
             case "Entrada": return dispatch({ type: 'SET_DATA_TYPE_FILTER_ENTRADA', payload_entrada: value});
             case "Saida": return dispatch({ type: 'SET_DATA_TYPE_FILTER_SAIDA', payload_saida: value});
         }
-        
     };
     const [state, dispatch] = React.useReducer(filterReducer, initialState);
 
-    const CreateNewFilterFunction = (type: string) => {
-        setHaveNewFilter(true);
+
+    // DEFINIÇÃO DO OUTRO FILTRO
+    const NewFilterState: NewFilterType = {
+        type: ""
     }
+    function NewFilterReducer(state: NewFilterType, action: NewFilterTypeActions): NewFilterType {
+        switch (action.payload) {
+          case 'Account':
+            return { ...state, type: "Account"};
+        case 'Credit_card':
+            return { ...state, type: "Credit_card"};
+        case 'User':
+            return { ...state, type: "User"};
+        case 'Value':
+            return { ...state, type: "Value"};
+        case 'Tags':
+            return { ...state, type: "Tags"};
+          default:
+            return state;
+        }
+    }
+    const [newFilterType, setNewFilterType] = React.useReducer(NewFilterReducer, NewFilterState);
+    const handleNewFilterTypeChange = (value: string) => {
+        switch(value){
+            case "Account": return setNewFilterType({ type: 'SET_FILTER_TYPE_ACCOUNT', payload: "Account"});
+            case "Credit_card": return setNewFilterType({ type: 'SET_FILTER_TYPE_ACCOUNT', payload: "Credit_card"});
+            case "User": return setNewFilterType({ type: 'SET_FILTER_TYPE_ACCOUNT', payload: "User"});
+            case "Value": return setNewFilterType({ type: 'SET_FILTER_TYPE_ACCOUNT', payload: "Value"});
+            case "Tags": return setNewFilterType({ type: 'SET_FILTER_TYPE_ACCOUNT', payload: "Tags"});
+        }
+        
+    };
+    
 
     React.useEffect( () => {
         searchData();
-    }, [haveEntrada, haveSaida])
+    }, [state.entrada, state.saida])
 
     return (
         <Background>
@@ -149,19 +142,14 @@ export const Finance = () => {
                         handleFilterChange={handleFilterChange}
                         state={state}
                     />
-                    {haveNewFilter && <p>aaa</p>}
-                    {!haveNewFilter &&
-                    <CreateNewFilter CreateNewFilterFunction={CreateNewFilterFunction}/>}
+                    <CreateNewFilter handleNewFilterTypeChange={handleNewFilterTypeChange}/>
                 </FiltersGrid>
                 
                 <button id='buttonDeleteFilters'>Zerar filtros</button>
                 <button id='buttonSaveFilters'>Salvar filtros</button>
             </Container>
 
-            <DataTable
-            columns={columns}
-            data={transactions}
-            />
+            <Table data={transactions}/>
         </Background>
     )
 }
