@@ -59,6 +59,10 @@ type NewFilterProps = {
 
 export const NewFilter = ({label, items} : NewFilterProps) => {
 
+    const [selected, setSelected] = React.useState<string>("");
+
+    console.log(selected, 'BBBBBBBBBBAAAAAAAAA')
+
     const [selectedItem, setSelectedItem] = React.useState<SelectItem | null | undefined>(null);
 
     const handleSelectItem = (selectedItem: SelectItem | null | undefined) => {
@@ -67,19 +71,7 @@ export const NewFilter = ({label, items} : NewFilterProps) => {
 
     return(
         <Container>
-            <Select label={label} items={items} onSelectItem={handleSelectItem}/>
-            {/* <useSelect></useSelect> */}
-            {/* <Menu arrow={true} menuButton={
-                
-                <MenuButton style={{width: '10rem'}} className="szh-menu">{items[0].account}</MenuButton>
-                } transition>
-                    {items.map( item => {
-                        return(
-                            <MenuItem 
-                            type='checkbox'>{item.account}</MenuItem>
-                        )
-                    })}
-            </Menu>   */}
+            <Select setSelected={setSelected} label={label} items={items} onSelectItem={handleSelectItem}/>
         </Container>
     )
 }
@@ -94,7 +86,7 @@ export const CreateNewFilter = ({handleNewFilterTypeChange} : CreateNewFilterPro
             <AddFilter style={{width: '32px'}} className="szh-menu"></AddFilter>
         } transition>
             <MenuItem onClick={() => handleNewFilterTypeChange('Account')}>Conta</MenuItem>
-            <MenuItem onClick={() => handleNewFilterTypeChange('Credit_card')}>Cartão de Crédito</MenuItem>
+            <MenuItem onClick={() => handleNewFilterTypeChange('Credit_card')}>Cartão</MenuItem>
             <MenuItem onClick={() => handleNewFilterTypeChange('User')}>Usuário</MenuItem>
             <MenuItem onClick={() => handleNewFilterTypeChange('Value')}>Valor</MenuItem>
             <MenuItem onClick={() => handleNewFilterTypeChange('Tags')}>Tags</MenuItem>

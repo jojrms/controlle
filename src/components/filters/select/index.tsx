@@ -11,10 +11,11 @@ export interface SelectItem {
 interface SelectProps {
     label: string,
     items: SelectItem[];
+    setSelected: any,
     onSelectItem: (selectedItem: SelectItem | null | undefined) => void;
 }
 
-const Select: React.FC<SelectProps> = ({ label, items, onSelectItem }) => {
+const Select: React.FC<SelectProps> = ({ label, items, setSelected, onSelectItem }) => {
   // Use o hook useSelect
   const {
     isOpen,
@@ -29,13 +30,15 @@ const Select: React.FC<SelectProps> = ({ label, items, onSelectItem }) => {
     onSelectedItemChange: ({ selectedItem }) => onSelectItem(selectedItem),
   });
 
+  setSelected(selectedItem)
+
   return (
     <Container>
         <React.Fragment>
             <Label {...getLabelProps()}>{label}</Label>
             <FilterButton
                 {...getToggleButtonProps()}>
-                <span>{selectedItem ? selectedItem.value : 'Elements'}</span>
+                <span>{selectedItem ? selectedItem.value : items[0].value}</span>
             </FilterButton>
         </React.Fragment>
         <ul
