@@ -26,7 +26,7 @@ Node = foi utilizado o 18.16.1
 
 
 ## COMO INICIAR
-## OBS.: CERTIFIQUE-SE DE UTILIZAR O NODE 18.16.1
+### OBS.: CERTIFIQUE-SE DE UTILIZAR O NODE 18.16.1
 ### 1. INSTALAÇÃO DOS MÓDULOS NODE
 Execute `npm i` para instalar todos os node_modules
 ### 2. START O SERVIDOR FALSO
