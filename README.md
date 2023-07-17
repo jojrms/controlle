@@ -7,6 +7,8 @@ Toda a estilização foi feita utilizando Styled-components.
 A tabela possui 3 tipos de filtros: Tipo de dado (Entrada/Saída), Conta bancária e Forma de Pagamento.
 Todos os filtros são armazenados no React Reducer.
 
+### OBS.: A interface foi feita para desktop, não sendo responsiva.
+
 ## MOCKUP
 ![Alt text](image.png)
 
