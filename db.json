@@ -3,6 +3,7 @@
     {
       "id": 1,
       "type": "saida",
+      "pay": "Cartão de Crédito",
       "category": "Padaria e Cafeteria",
       "bank": "Santander",
       "datatime": "typicode",
@@ -11,6 +12,7 @@
     {
       "id": 2,
       "type": "saida",
+      "pay": "Cartão de Crédito",
       "category": "Restaurante",
       "bank": "Bradesco",
       "datatime": "typicode",
@@ -19,6 +21,7 @@
     {
       "id": 3,
       "type": "entrada",
+      "pay": "Cartão de Crédito",
       "category": "Restaurante",
       "bank": "Sicredi",
       "datatime": "typicode",
@@ -27,6 +30,7 @@
     {
       "id": 4,
       "type": "saida",
+      "pay": "Cartão de Débito",
       "category": "Hotel",
       "bank": "Bradesco",
       "datatime": "typicode",
@@ -35,6 +39,7 @@
     {
       "id": 5,
       "type": "entrada",
+      "pay": "Cartão de Crédito",
       "category": "Padaria e Cafeteria",
       "bank": "Bradesco",
       "datatime": "typicode",
@@ -43,6 +48,7 @@
     {
       "id": 6,
       "type": "saida",
+      "pay": "Cartão de Débito",
       "category": "Posto de Gasolina",
       "bank": "Santander",
       "datatime": "typicode",
@@ -51,6 +57,7 @@
     {
       "id": 7,
       "type": "saida",
+      "pay": "Cartão de Crédito",
       "category": "Spotify",
       "bank": "Nubank",
       "datatime": "typicode",

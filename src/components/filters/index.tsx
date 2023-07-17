@@ -19,8 +19,6 @@ type InitialFilter = {
 
 export const InitialFilter = ({state, handleFilterChange} : InitialFilter) => {
 
-    console.log(state, handleFilterChange, 'bbbbbbbb')
-
     const returnValues = () => {
         if(state.entrada && !state.saida) return "Entrada";
         if(!state.entrada && state.saida) return "Saída";
@@ -55,13 +53,12 @@ type NewFilterAccountProps = {
 type NewFilterProps = {
     label: string;
     items: Array<SelectItem>,
+    newFilterType: any,
+    handleNewFilterTypeChange: any,
 }
 
-export const NewFilter = ({label, items} : NewFilterProps) => {
+export const NewFilter = ({label, items, newFilterType, handleNewFilterTypeChange} : NewFilterProps) => {
 
-    const [selected, setSelected] = React.useState<string>("");
-
-    console.log(selected, 'BBBBBBBBBBAAAAAAAAA')
 
     const [selectedItem, setSelectedItem] = React.useState<SelectItem | null | undefined>(null);
 
@@ -71,25 +68,26 @@ export const NewFilter = ({label, items} : NewFilterProps) => {
 
     return(
         <Container>
-            <Select setSelected={setSelected} label={label} items={items} onSelectItem={handleSelectItem}/>
+            <Select newFilterType={newFilterType} handleNewFilterTypeChange={handleNewFilterTypeChange} label={label} items={items} onSelectItem={handleSelectItem}/>
         </Container>
     )
 }
 
 type CreateNewFilterProps = {
-    handleNewFilterTypeChange: any
+    handleNewFilterTypeChange: any,
+    items: Array<SelectItem>,
 }
 
-export const CreateNewFilter = ({handleNewFilterTypeChange} : CreateNewFilterProps) => {
+export const CreateNewFilter = ({handleNewFilterTypeChange, items} : CreateNewFilterProps) => {
     return(
         <Menu menuButton={
             <AddFilter style={{width: '32px'}} className="szh-menu"></AddFilter>
         } transition>
-            <MenuItem onClick={() => handleNewFilterTypeChange('Account')}>Conta</MenuItem>
-            <MenuItem onClick={() => handleNewFilterTypeChange('Credit_card')}>Cartão</MenuItem>
-            <MenuItem onClick={() => handleNewFilterTypeChange('User')}>Usuário</MenuItem>
-            <MenuItem onClick={() => handleNewFilterTypeChange('Value')}>Valor</MenuItem>
-            <MenuItem onClick={() => handleNewFilterTypeChange('Tags')}>Tags</MenuItem>
+            <MenuItem onClick={() => handleNewFilterTypeChange('Account', items[0].value)}>Conta</MenuItem>
+            <MenuItem onClick={() => handleNewFilterTypeChange('Credit_card', items[0].value)}>Cartão</MenuItem>
+            <MenuItem onClick={() => handleNewFilterTypeChange('User', items[0].value)} disabled={true}>Usuário</MenuItem>
+            <MenuItem onClick={() => handleNewFilterTypeChange('Value', items[0].value)} disabled={true}>Valor</MenuItem>
+            <MenuItem onClick={() => handleNewFilterTypeChange('Tags', items[0].value)} disabled={true}>Tags</MenuItem>
         </Menu>    
     )
 }

@@ -11,11 +11,12 @@ export interface SelectItem {
 interface SelectProps {
     label: string,
     items: SelectItem[];
-    setSelected: any,
+    handleNewFilterTypeChange: any,
+    newFilterType: any,
     onSelectItem: (selectedItem: SelectItem | null | undefined) => void;
 }
 
-const Select: React.FC<SelectProps> = ({ label, items, setSelected, onSelectItem }) => {
+const Select: React.FC<SelectProps> = ({ label, items, newFilterType, handleNewFilterTypeChange, onSelectItem }) => {
   // Use o hook useSelect
   const {
     isOpen,
@@ -30,7 +31,9 @@ const Select: React.FC<SelectProps> = ({ label, items, setSelected, onSelectItem
     onSelectedItemChange: ({ selectedItem }) => onSelectItem(selectedItem),
   });
 
-  setSelected(selectedItem)
+  React.useEffect( () => {
+    handleNewFilterTypeChange(newFilterType.type, selectedItem?.value)
+  }, [selectedItem?.value])
 
   return (
     <Container>
@@ -48,14 +51,18 @@ const Select: React.FC<SelectProps> = ({ label, items, setSelected, onSelectItem
           {...getMenuProps()}
         >
           {isOpen &&
-            items.map((item, index) => (
-              <li
-                key={`${item.value}${index}`}
-                {...getItemProps({item, index})}
-              >
-                <span>{item.value}</span>
-              </li>
-            ))}
+            items.map((item, index) => {
+                
+                return(
+                <li
+                    key={`${item.value}${index}`}
+                    {...getItemProps({item, index})}
+                >
+                    <span>{item.value}</span>
+                </li>    
+                )
+              
+})}
         </ul>
       </Container>
   );

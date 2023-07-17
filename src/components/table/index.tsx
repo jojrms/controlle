@@ -27,6 +27,11 @@ export const Table = ({data} : TableProps) => {
             sortable: true,
         },
         {
+            name: 'Forma de Pagamento',
+            selector: (row: any) => row.pay,
+            sortable: true,
+        },
+        {
             name: 'Categoria',
             selector: (row: any) => row.category,
             sortable: true,

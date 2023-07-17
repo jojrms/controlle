@@ -21,10 +21,11 @@ type TransactionsProps = {
 }
 
 type NewFilterType = {
-    type: "Account" | "Credit_card" | "User" | "Value" | "Tags" | null
+    type: string | null,
+    value: string | null
 }
 type NewFilterTypeActions = 
-| {type: "SET_FILTER_TYPE_ACCOUNT", payload: "Account" | "Credit_card" | "User" | "Value" | "Tags" | ""}
+| {type: "SET_FILTER_TYPE_FILTER", payload: {type: string, value: string}}
 
 
 type FilterState = {
@@ -50,22 +51,39 @@ export const Finance = () => {
         await Axios.get('http://localhost:3000/transactions').then( res => {
 
             const result = res.data;
-            if(state.entrada && state.saida) return setTransactions(result);
+            if(state.entrada && state.saida){
+                const moreFilter = result.filter( (res: any) => {
+                    return newFilterType.type === 'Account' ? res.bank === newFilterType.value : res.pay === newFilterType.value
+                })
+
+                console.log(moreFilter, 'dados gerais')
+                setTransactions(newFilterType.type ? moreFilter : result);
+
+            }
             if(!state.entrada && state.saida) {
                 const filteredResult = result.filter( (res: any) => {
                     return res.type === 'saida'
                 });
 
-                console.log(filteredResult, 'dados de saida')
-                setTransactions(filteredResult);
+                const moreFilter = filteredResult.filter( (res: any) => {
+                    return newFilterType.type === 'Account' ? res.bank === newFilterType.value : res.pay === newFilterType.value
+                })
+
+                console.log(moreFilter, 'dados de saida')
+                setTransactions(newFilterType.type ? moreFilter : filteredResult);
             }
 
             if(state.entrada && !state.saida) {
                 const filteredResult = result.filter( (res: any) => {
                     return res.type === 'entrada'
                 });
-                console.log(filteredResult, 'dados de entrada')
-                setTransactions(filteredResult);
+
+                const moreFilter = filteredResult.filter( (res: any) => {
+                    return newFilterType.type === 'Account' ? res.bank === newFilterType.value : res.pay === newFilterType.value
+                })
+
+                console.log(moreFilter, 'dados de entrada')
+                setTransactions(newFilterType.type ? moreFilter : filteredResult);
             }
 
             if(!state.entrada && !state.saida) {
@@ -103,50 +121,35 @@ export const Finance = () => {
 
     // DEFINIÇÃO DO OUTRO FILTRO
     const NewFilterState: NewFilterType = {
-        type: null
+        type: null,
+        value: null
     }
     function NewFilterReducer(state: NewFilterType, action: NewFilterTypeActions): NewFilterType {
-        switch (action.payload) {
-          case 'Account':
-            return { ...state, type: "Account"};
-        case 'Credit_card':
-            return { ...state, type: "Credit_card"};
-        case 'User':
-            return { ...state, type: "User"};
-        case 'Value':
-            return { ...state, type: "Value"};
-        case 'Tags':
-            return { ...state, type: "Tags"};
+        switch (action.type) {
+          case 'SET_FILTER_TYPE_FILTER':
+            return { ...state, type: action.payload.type, value: action.payload.value};
           default:
             return state;
         }
     }
     const [newFilterType, setNewFilterType] = React.useReducer(NewFilterReducer, NewFilterState);
-    const handleNewFilterTypeChange = (value: string) => {
-        switch(value){
-            case "Account": return setNewFilterType({ type: 'SET_FILTER_TYPE_ACCOUNT', payload: "Account"});
-            case "Credit_card": return setNewFilterType({ type: 'SET_FILTER_TYPE_ACCOUNT', payload: "Credit_card"});
-            case "User": return setNewFilterType({ type: 'SET_FILTER_TYPE_ACCOUNT', payload: "User"});
-            case "Value": return setNewFilterType({ type: 'SET_FILTER_TYPE_ACCOUNT', payload: "Value"});
-            case "Tags": return setNewFilterType({ type: 'SET_FILTER_TYPE_ACCOUNT', payload: "Tags"});
-        }
-        
+    const handleNewFilterTypeChange = (type: string, value: string) => {
+        return setNewFilterType({ type: 'SET_FILTER_TYPE_FILTER', payload: { type, value } });
     };
     const returnLabelInNewFilter = () => {
         switch(newFilterType.type){
             case "Account": return "Conta";
-            case "Credit_card": return "Cartão de Crédito";
+            case "Credit_card": return "Cartão";
             case "User": return "Usuário";
             case "Value": return "Valor";
             case "Tags": return "Tags";
             default: return "Filtro"
         }
     }
-     console.log(newFilterType, 'newFilterType.type')
 
     React.useEffect( () => {
         searchData();
-    }, [state.entrada, state.saida])
+    }, [state.entrada, state.saida, newFilterType])
 
     const BanksOptions: SelectItem[] = [
         {value: "Banco do Brasil"},
@@ -168,8 +171,14 @@ export const Finance = () => {
                         state={state}
                     />
                     {newFilterType.type &&
-                    <NewFilter items={newFilterType.type === "Account" ? BanksOptions : Card} label={returnLabelInNewFilter()}/>}
-                    <CreateNewFilter handleNewFilterTypeChange={handleNewFilterTypeChange}/>
+                        <NewFilter 
+                        items={newFilterType.type === "Account" ? BanksOptions : Card}
+                        label={returnLabelInNewFilter()}
+                        newFilterType={newFilterType}
+                        handleNewFilterTypeChange={handleNewFilterTypeChange}/>
+                    }
+
+                    <CreateNewFilter items={newFilterType.type === "Account" ? BanksOptions : Card} handleNewFilterTypeChange={handleNewFilterTypeChange}/>
                 </FiltersGrid>
                 
                 <button id='buttonDeleteFilters'>Zerar filtros</button>
