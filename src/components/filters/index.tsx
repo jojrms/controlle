@@ -75,19 +75,34 @@ export const NewFilter = ({label, items, newFilterType, handleNewFilterTypeChang
 
 type CreateNewFilterProps = {
     handleNewFilterTypeChange: any,
-    items: Array<SelectItem>,
+    setNewFilterType: any,
 }
 
-export const CreateNewFilter = ({handleNewFilterTypeChange, items} : CreateNewFilterProps) => {
+export const CreateNewFilter = ({handleNewFilterTypeChange, setNewFilterType} : CreateNewFilterProps) => {
+
+    const BanksOptions: SelectItem[] = [
+        {value: "Banco do Brasil"},
+        {value: "Bradesco"},
+        {value: "Santander"},
+    ]
+    const Card: SelectItem[] = [
+        {value: "Cartão de Crédito"},
+        {value: "Cartão de Débito"},
+    ]
+
+    const setNewFilter = (type: string) => {
+        handleNewFilterTypeChange(type, type === 'Account' ? BanksOptions[0].value : Card[0].value)
+        setNewFilterType(type, type === 'Account' ? BanksOptions[0].value : Card[0].value)
+    }
     return(
         <Menu menuButton={
             <AddFilter style={{width: '32px'}} className="szh-menu"></AddFilter>
         } transition>
-            <MenuItem onClick={() => handleNewFilterTypeChange('Account', items[0].value)}>Conta</MenuItem>
-            <MenuItem onClick={() => handleNewFilterTypeChange('Credit_card', items[0].value)}>Cartão</MenuItem>
-            <MenuItem onClick={() => handleNewFilterTypeChange('User', items[0].value)} disabled={true}>Usuário</MenuItem>
-            <MenuItem onClick={() => handleNewFilterTypeChange('Value', items[0].value)} disabled={true}>Valor</MenuItem>
-            <MenuItem onClick={() => handleNewFilterTypeChange('Tags', items[0].value)} disabled={true}>Tags</MenuItem>
+            <MenuItem onClick={() => setNewFilter('Account')}>Conta</MenuItem>
+            <MenuItem onClick={() => setNewFilter('Credit_card')}>Cartão</MenuItem>
+            <MenuItem onClick={() => setNewFilter('User')} disabled={true}>Usuário</MenuItem>
+            <MenuItem onClick={() => setNewFilter('Value')} disabled={true}>Valor</MenuItem>
+            <MenuItem onClick={() => setNewFilter('Tag')} disabled={true}>Tags</MenuItem>
         </Menu>    
     )
 }

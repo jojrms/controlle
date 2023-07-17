@@ -50,6 +50,8 @@ export const Finance = () => {
     const searchData = async () => {
         await Axios.get('http://localhost:3000/transactions').then( res => {
 
+        console.log(newFilterType)
+
             const result = res.data;
             if(state.entrada && state.saida){
                 const moreFilter = result.filter( (res: any) => {
@@ -178,7 +180,7 @@ export const Finance = () => {
                         handleNewFilterTypeChange={handleNewFilterTypeChange}/>
                     }
 
-                    <CreateNewFilter items={newFilterType.type === "Account" ? BanksOptions : Card} handleNewFilterTypeChange={handleNewFilterTypeChange}/>
+                    <CreateNewFilter setNewFilterType={setNewFilterType} handleNewFilterTypeChange={handleNewFilterTypeChange}/>
                 </FiltersGrid>
                 
                 <button id='buttonDeleteFilters'>Zerar filtros</button>

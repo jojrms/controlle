@@ -6,7 +6,7 @@
       "pay": "Cartão de Crédito",
       "category": "Padaria e Cafeteria",
       "bank": "Santander",
-      "datatime": "typicode",
+      "datatime": "09/05/2023",
       "value": 89.90
     },
     {
@@ -15,7 +15,7 @@
       "pay": "Cartão de Crédito",
       "category": "Restaurante",
       "bank": "Bradesco",
-      "datatime": "typicode",
+      "datatime": "11/05/2023",
       "value": 457.58
     },
     {
@@ -24,7 +24,7 @@
       "pay": "Cartão de Crédito",
       "category": "Restaurante",
       "bank": "Sicredi",
-      "datatime": "typicode",
+      "datatime": "11/05/2023",
       "value": 200.10
     },
     {
@@ -33,7 +33,7 @@
       "pay": "Cartão de Débito",
       "category": "Hotel",
       "bank": "Bradesco",
-      "datatime": "typicode",
+      "datatime": "12/05/2023",
       "value": 550.55
     },
     {
@@ -42,7 +42,7 @@
       "pay": "Cartão de Crédito",
       "category": "Padaria e Cafeteria",
       "bank": "Bradesco",
-      "datatime": "typicode",
+      "datatime": "12/05/2023",
       "value": 108.95
     },
     {
@@ -51,7 +51,7 @@
       "pay": "Cartão de Débito",
       "category": "Posto de Gasolina",
       "bank": "Santander",
-      "datatime": "typicode",
+      "datatime": "15/05/2023",
       "value": 100
     },
     {
@@ -59,8 +59,8 @@
       "type": "saida",
       "pay": "Cartão de Crédito",
       "category": "Spotify",
-      "bank": "Nubank",
-      "datatime": "typicode",
+      "bank": "Banco do Brasil",
+      "datatime": "18/05/2023",
       "value": 17.25
     }
   ]

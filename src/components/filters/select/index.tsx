@@ -32,7 +32,7 @@ const Select: React.FC<SelectProps> = ({ label, items, newFilterType, handleNewF
   });
 
   React.useEffect( () => {
-    handleNewFilterTypeChange(newFilterType.type, selectedItem?.value)
+    handleNewFilterTypeChange(newFilterType.type, selectedItem?.value ? selectedItem?.value : items[0].value)
   }, [selectedItem?.value])
 
   return (
